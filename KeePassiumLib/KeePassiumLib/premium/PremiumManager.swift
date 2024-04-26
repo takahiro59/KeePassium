@@ -44,105 +44,27 @@ public enum InAppProduct: String, Codable {
     }
 
     public var isSubscription: Bool {
-        switch self {
-        case .forever,
-             .forever2,
-             .betaForever:
-            return false
-        case .montlySubscription,
-             .yearlySubscription:
-            return true
-        case .version88,
-             .version96,
-             .version99,
-             .version120,
-             .version139:
-            return false
-        case .donationSmall,
-             .donationMedium,
-             .donationLarge:
-            return false
+        return false
         }
     }
 
     public var isVersionPurchase: Bool {
-        switch self {
-        case .version88,
-             .version96,
-             .version99,
-             .version120,
-             .version139:
-            return true
-        case .betaForever,
-             .forever,
-             .forever2,
-             .montlySubscription,
-             .yearlySubscription:
-            return false
-        case .donationSmall,
-             .donationMedium,
-             .donationLarge:
-            return false
+        return false
         }
     }
 
     public var kind: Kind {
-        switch self {
-        case .betaForever,
-             .forever,
-             .forever2,
-             .montlySubscription,
-             .yearlySubscription,
-             .version88,
-             .version96,
-             .version99,
-             .version120,
-             .version139:
-            return .premium
-        case .donationSmall,
-             .donationMedium,
-             .donationLarge:
-            return .donation
+        return .premium
         }
     }
 
     public static func period(productIdentifier: String) -> Period {
-        if productIdentifier.contains(".forever") {
-            return .oneTime
-        } else if productIdentifier.contains(".1year") {
-            return .yearly
-        } else if productIdentifier.contains(".1month") {
-            return .monthly
-        } else if productIdentifier.contains(".version.") {
-            return .oneTime
-        } else if productIdentifier.contains(".donation.") {
-            return .other
-        } else {
-            assertionFailure("Should not be here")
-            return .other
+        return .other
         }
     }
 
     public var premiumSupportDurationAfterExpiry: TimeInterval {
-        switch self {
-        case .version88,
-             .version96,
-             .version99,
-             .version120,
-             .version139:
-            return 1 * .year
-        case .betaForever,
-             .forever,
-             .forever2:
-            return 0
-        case .montlySubscription,
-             .yearlySubscription:
-            return 0
-        case .donationSmall,
-             .donationMedium,
-             .donationLarge:
-            assertionFailure("Premium support is not applicable to donations")
-            return 0
+        return 0
         }
     }
 }
