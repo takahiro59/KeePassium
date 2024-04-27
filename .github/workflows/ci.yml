@@ -12,14 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build Projects
-      run: xcodebuild build
+      run: xcodebuild build \
            -project KeePassium.xcodeproj \
            -scheme KeePassium \
            -sdk iphoneos \
            -configuration Release \
            CODE_SIGNING_ALLOWED=NO
     - name: Build archive
-      run: xcodebuild build
+      run: xcodebuild build \
            -project KeePassium.xcodeproj \
            -scheme KeePassium \
            -sdk iphoneos \
