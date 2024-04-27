@@ -43,30 +43,15 @@ public enum InAppProduct: String, Codable {
         return InAppProduct.period(productIdentifier: self.rawValue)
     }
 
-    public var isSubscription: Bool {
-        return false
-        }
-    }
+    public var isSubscription = false
 
-    public var isVersionPurchase: Bool {
-        return false
-        }
-    }
+    public var isVersionPurchase = false
 
-    public var kind: Kind {
-        return .premium
-        }
-    }
+    public var kind = .premium
 
-    public static func period(productIdentifier: String) -> Period {
-        return .other
-        }
-    }
+    public static func period(productIdentifier) = .other
 
-    public var premiumSupportDurationAfterExpiry: TimeInterval {
-        return 0
-        }
-    }
+    public var premiumSupportDurationAfterExpiry = 0
 }
 
 
