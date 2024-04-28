@@ -42,16 +42,50 @@ public enum InAppProduct: String, Codable {
     public var period: Period {
         return InAppProduct.period(productIdentifier: self.rawValue)
     }
+    
+    public var isSubscription: Bool {
+        switch self {
+        case .montlySubscription, .yearlySubscription:
+            return true
+        default:
+            return false
+        }
+    }
 
-    public var isSubscription = false
+    public var isVersionPurchase: Bool {
+        switch self {
+        case .version88, .version96, .version99, .version120, .version139:
+            return true
+        default:
+            return false
+        }
+    }
 
-    public var isVersionPurchase = false
+    public var kind: Kind {
+        switch self {
+        case .donationSmall, .donationMedium, .donationLarge:
+            return .donation
+        default:
+            return .premium
+        }
+    }
 
-    public var kind = .premium
+    public static func period(for product: InAppProduct) -> Period {
+        switch product {
+        case .oneTime:
+            return .oneTime
+        case .monthlySubscription:
+            return .monthly
+        case .yearlySubscription:
+            return .yearly
+        default:
+            return .other
+        }
+    }
 
-    public static func period(productIdentifier) = .other
-
-    public var premiumSupportDurationAfterExpiry = 0
+    public var premiumSupportDurationAfterExpiry: Int {
+        return 0
+    }
 }
 
 
