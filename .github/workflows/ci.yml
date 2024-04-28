@@ -15,8 +15,6 @@ jobs:
       run: xcodebuild build -project KeePassium.xcodeproj -scheme KeePassium -sdk iphoneos -configuration Release CODE_SIGNING_ALLOWED=NO
     - name: Build archive
       run: xcodebuild build -project KeePassium.xcodeproj -scheme KeePassium -sdk iphoneos -configuration Release -archivePath KeePassium.xcarchive CODE_SIGNING_ALLOWED=NO
-    - name: Create ExportOptions.plist
-      run: echo '${{ secrets.EXPORT_OPTIONS }}' > ExportOptions.plist
     - name: Build app
       run: xcodebuild -exportArchive -archivePath ./KeePassium.xcarchive -exportPath . -exportOptionsPlist ./KeePassium.xcarchive/Info.plist
     - name: Upload Artifact
